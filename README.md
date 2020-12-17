@@ -60,6 +60,7 @@
 | address       | string     | null: false                    |
 | buiding       | string     |                                |
 | phone_number  | string     | null:false                     |
+| province_id   | integer    | null: false                    |
 | order         | references | null: false, foreign_key: true |
 
 ### Association
