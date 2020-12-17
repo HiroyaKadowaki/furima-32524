@@ -47,9 +47,9 @@
 
 ### Association
 
-- belong_to :user
+- belongs_to :user
 - has_one :ship
-- belong_to :item
+- belongs_to :item
 
 ## ships テーブル
 
