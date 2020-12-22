@@ -115,5 +115,45 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Email is invalid")
     end
+
+    it "ユーザー本名は全角での入力で登録ができること" do
+      @user.last_name = "苗字"
+      @user.first_name = "氏名"
+      expect(@user).to be_valid
+    end
+
+    it "ユーザー本名（苗字）は全角での入力以外では登録ができないこと" do
+      @user.last_name = "myouji"
+      @user.first_name = "氏名"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Last name 全角文字を使用してください")
+    end
+
+    it "ユーザー本名（氏名）は全角での入力以外では登録ができないこと" do
+      @user.last_name = "苗字"
+      @user.first_name = "simei"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name 全角文字を使用してください")
+    end
+
+    it "ユーザー本名フリガナは全角カタカナで登録ができること" do
+      @user.last_kana = "ミョウジ"
+      @user.first_kana = "シメイ"
+      expect(@user).to be_valid
+    end
+
+    it "ユーザー本名(苗字）フリガナは全角カタカナ入力以外では登録ができないこと" do
+      @user.last_name = "myouji"
+      @user.first_name = "氏名"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Last name 全角文字を使用してください")
+    end
+
+    it "ユーザー本名(氏名）フリガナは全角カタカナ入力以外では登録ができないこと" do
+      @user.last_name = "ミョウジ"
+      @user.first_name = "simei"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name 全角文字を使用してください")
+    end
   end
 end
