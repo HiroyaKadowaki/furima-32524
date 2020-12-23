@@ -1,4 +1,4 @@
-class Genre < ActiveHash::Base
+class Province < ActiveHash::Base
   self.data = [
     { id: 1, name: '--' },
     { id: 2, name: '北海道' },
@@ -39,7 +39,7 @@ class Genre < ActiveHash::Base
     { id: 37, name: '徳島県' },
     { id: 38, name: '香川県' },
     { id: 39, name: '愛媛県' },
-    { id: 40, name: '高知県' }
+    { id: 40, name: '高知県' },
     { id: 41, name: '福岡県' },
     { id: 42, name: '佐賀県' },
     { id: 43, name: '長崎県' },
@@ -49,4 +49,8 @@ class Genre < ActiveHash::Base
     { id: 47, name: '鹿児島県' },
     { id: 48, name: '沖縄県' },
   ]
+
+  include ActiveHash::Associations
+  has_many :items
+
   end
