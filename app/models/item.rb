@@ -5,8 +5,11 @@ class Item < ApplicationRecord
   belongs_to :province
   belongs_to :ship_day
   belongs_to :state
-  validates :name, presence: true
-  validates :description, presence: true
+
+  with_options presence: true do
+    validates :name
+    validates :description
+  end
 
   has_one_attached :image
   validates :image, presence: true
