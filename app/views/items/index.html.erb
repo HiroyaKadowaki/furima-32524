@@ -131,9 +131,13 @@
           <div class='item-img-content'>
             <%= link_to image_tag(item.image, class: "item-img"),item_path(item.id) if item.image.attached? %>
 
-            <div class='sold-out'>
+            <%
+=begin%>
+ <div class='sold-out'>
               <span>Sold Out!!</span>
             </div>
+<%
+=end%>
 
           </div>
           <div class='item-info'>
