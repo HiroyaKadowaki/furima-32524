@@ -57,6 +57,20 @@ RSpec.describe OrderShip, type: :model do
         expect(@order_ship.errors.full_messages).to include "Token can't be blank"
       end
 
+      it "user_idが空では保存できないこと" do
+        @order_ship.user_id = nil
+        @order_ship.valid?
+        expect(@order_ship.errors.full_messages).to include "User can't be blank"
+      end
+
+      it "item_idが空では保存できないこと" do
+        @order_ship.item_id = nil
+        @order_ship.valid?
+        expect(@order_ship.errors.full_messages).to include "Item can't be blank"
+      end
+
+
+
       it "zipに-がないと登録できないこと" do
         @order_ship.zip = "0000000"
         @order_ship.valid?
@@ -69,6 +83,23 @@ RSpec.describe OrderShip, type: :model do
         expect(@order_ship.errors.full_messages).to include "Phone number is invalid"
       end
 
+      it "province_idが空では登録できないこと" do
+        @order_ship.province_id = nil
+        @order_ship.valid?
+        expect(@order_ship.errors.full_messages).to include "Province can't be blank"
+      end
+
+      it "phone_numberが11以内でないと登録できないこと" do
+        @order_ship.phone_number = "000000000000"
+        @order_ship.valid?
+        expect(@order_ship.errors.full_messages).to include "Phone number is invalid"
+      end
+
+      it "phone_numberが数字でないと登録できないこと" do
+        @order_ship.phone_number = "零八零零零零零零零零零"
+        @order_ship.valid?
+        expect(@order_ship.errors.full_messages).to include "Phone number is invalid"
+      end
     end
 
   end

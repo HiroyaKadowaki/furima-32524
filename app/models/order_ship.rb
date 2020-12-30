@@ -6,7 +6,7 @@ class OrderShip
     validates :zip, format:  { with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)" }
     validates :city
     validates :address
-    validates :phone_number, format: { with: /\A[0-9]+\z/, messages: "can't be blank" }
+    validates :phone_number, format: { with: /\A[0-9]{,11}\z/, messages: "can't be blank" }
     validates :province_id, numericality: { other_than: 1, message: "can't be blank" }
     validates :token
     validates :user_id
