@@ -6,6 +6,7 @@ RSpec.describe OrderShip, type: :model do
       @item = FactoryBot.create(:item)
       @user = FactoryBot.create(:user)
       @order_ship = FactoryBot.build(:order_ship, item_id: @item.id, user_id: @user.id)
+      sleep(1)
     end
 
     context 'データが保存できる時' do
@@ -50,6 +51,19 @@ RSpec.describe OrderShip, type: :model do
         @order_ship.valid?
         expect(@order_ship.errors.full_messages).to include "Token can't be blank"
       end
+
+      it "zipに-がないと登録できないこと" do
+        @order_ship.zip = "0000000"
+        @order_ship.valid?
+        expect(@order_ship.errors.full_messages).to include "Zip is invalid. Include hyphen(-)"
+      end
+
+      it "phone_numberに-があると登録できないこと" do
+        @order_ship.phone_number = "000-0000-0000"
+        @order_ship.valid?
+        expect(@order_ship.errors.full_messages).to include "Phone number is invalid"
+      end
+
     end
 
   end

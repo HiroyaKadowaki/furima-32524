@@ -1,12 +1,13 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!,only: [:index, :create]
+  before_action :set_order, only: [:index, :create]
+  before_action :move_to_index, only: [:index, :create]
 
   def index
-    @order = Item.find(params[:item_id])
     @order_ship = OrderShip.new
   end
 
   def create
-    @order = Item.find(params[:item_id])
     @order_ship = OrderShip.new(ship_params)
     if @order_ship.valid?
       pay_order
@@ -18,6 +19,11 @@ class OrdersController < ApplicationController
   end
 
   private
+  def move_to_index
+    if @order.order != nil
+      redirect_to root_path action: :index
+    end
+  end
 
 
   def ship_params
@@ -31,5 +37,9 @@ class OrdersController < ApplicationController
       card: ship_params[:token],
       currency:'jpy'
     )
+  end
+
+  def set_order
+    @order = Item.find(params[:item_id])
   end
 end
