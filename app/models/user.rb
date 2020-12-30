@@ -7,8 +7,8 @@ class User < ApplicationRecord
   validates :nickname, presence: true
   validates :birth, presence: true
 
-  has_many :irems
-  has_many :orders
+  has_many :items
+  has_many :order_ships
 
 
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i
